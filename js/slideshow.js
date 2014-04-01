@@ -4,13 +4,13 @@ if (!window.Slideshow ) {
 
 window.Slideshow.Picture = function (element) {
     this.$element = element;
+    this.slides = this.$element.children()
     this.current = 0;
-    this.nbimg = this.$element.children().length;
+    this.nbimg = this.slides.length;
     var _this = this;
-    $(this.$element.children()[this.current]).siblings().hide()
+    $(this.slides[this.current]).siblings().hide()
 
     this.$element.on( "goTo", function(e, data) {
-        console.log(data);
         _this.goTo(data);
     });
     this.$element.on("next", function() {
@@ -19,30 +19,33 @@ window.Slideshow.Picture = function (element) {
     this.$element.on("previous", function() {
         _this.previous();
     });
+    return this
 }
 
 window.Slideshow.Picture.prototype.goTo = function (index) {
-    this.$element.children().stop()
-    this.$element.children().eq(this.current)
+    this.slides.stop()
+    this.slides.eq(this.current)
         .fadeOut("slow")
-        .siblings().hide();
+        .siblings()
+        .hide();
     this.current = index;
-    this.$element.children().eq(this.current).fadeIn("slow");
+    this.slides.eq(this.current).fadeIn("slow");
+    return this
 }
 
 window.Slideshow.Picture.prototype.next = function () {
     if(this.current < this.nbimg-1) {
-        this.$element.children().eq(this.current).fadeOut("slow");
+        this.slides.eq(this.current).fadeOut("slow");
         this.current ++;
-        this.$element.children().eq(this.current).fadeIn("slow");
+        this.slides.eq(this.current).fadeIn("slow");
     }
 }
 
 window.Slideshow.Picture.prototype.previous = function () {
     if(this.current > 0) {
-        this.$element.children().eq(this.current).fadeOut("slow");
+        this.slides.eq(this.current).fadeOut("slow");
         this.current --;
-        this.$element.children().eq(this.current).fadeIn("slow");
+        this.slides.eq(this.current).fadeIn("slow");
     }
 }
 

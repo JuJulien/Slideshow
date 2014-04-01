@@ -41,11 +41,10 @@ button#p_n{
 }
 
 button#select{
-    width:8px;
-    height:8px;
+    width:10px;
+    height:10px;
     background: BFB3B3B;
     border-radius:50%;
     border:none;
     color: white;
 }
-
