@@ -3,6 +3,7 @@ if (!window.Slideshow ) {
 }
 
 window.Slideshow.Picture = function (element) {
+    console.log('init');
     this.$element = element;
     this.slides = this.$element.children()
     this.current = 0;
